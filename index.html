@@ -2,53 +2,32 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Stick War – DungxDev</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-body{margin:0;background:#222;color:#fff;font-family:sans-serif;text-align:center}
-canvas{background:#eef;display:block;margin:10px auto;border:2px solid #000}
-button{padding:6px 12px;margin:4px}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stick War Full Mini PWA</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 </head>
 <body>
-
-<h2>Stick War – Web Demo</h2>
-<p>A / D: di chuyển | Space: đánh</p>
-
-<button onclick="spawn()">Gọi quân</button>
-<canvas id="game" width="900" height="400"></canvas>
-
+<h1>Stick War Full Mini</h1>
+<div id="menu">
+  <button onclick="startGame('campaign')">Campaign</button>
+  <button onclick="startGame('survival')">Survival</button>
+  <button onclick="startGame('pvp')">PvP 2 người</button>
+</div>
+<canvas id="game" width="1000" height="500"></canvas>
+<div id="ui">
+  <div id="controls"></div>
+  <span>Vàng: <span id="gold">100</span></span>
+  <span>Base HP: <span id="baseHp">200</span></span>
+  <span>Wave: <span id="wave">1</span></span>
+</div>
+<script src="game.js"></script>
 <script>
-const c=document.getElementById("game"),ctx=c.getContext("2d");
-let units=[],hero={x:100,hp:100};
-
-function spawn(){
-  units.push({x:800});
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js')
+    .then(()=>console.log('Service Worker registered'))
+    .catch(err=>console.log('Service Worker failed:', err));
 }
-
-function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-
-  // hero
-  ctx.fillStyle="#000";
-  ctx.fillRect(hero.x,300,10,30);
-
-  // units
-  ctx.fillStyle="red";
-  units.forEach(u=>{
-    u.x-=0.5;
-    ctx.fillRect(u.x,300,10,30);
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="a") hero.x-=10;
-  if(e.key==="d") hero.x+=10;
-});
 </script>
-
 </body>
 </html>
