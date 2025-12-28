@@ -3,31 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stick War Full Mini PWA</title>
+<title>Stick War GitHub</title>
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
 </head>
 <body>
-<h1>Stick War Full Mini</h1>
 <div id="menu">
-  <button onclick="startGame('campaign')">Campaign</button>
-  <button onclick="startGame('survival')">Survival</button>
-  <button onclick="startGame('pvp')">PvP 2 người</button>
+  <img src="assets/menu-bg.png" alt="Menu Background" id="menu-bg">
+  <h1>Stick War Mini</h1>
+  <button onclick="startGame()">Chơi Ngay</button>
 </div>
-<canvas id="game" width="1000" height="500"></canvas>
-<div id="ui">
-  <div id="controls"></div>
-  <span>Vàng: <span id="gold">100</span></span>
-  <span>Base HP: <span id="baseHp">200</span></span>
-  <span>Wave: <span id="wave">1</span></span>
+
+<div id="game-container" style="display:none;">
+  <div id="ui">
+    <span>Vàng: <span id="gold">100</span></span>
+    <div id="buy-buttons">
+      <button onclick="buyUnit('miner')">Đào mỏ (20 vàng)</button>
+      <button onclick="buyUnit('sword')">Kiếm sĩ (30 vàng)</button>
+      <button onclick="buyUnit('archer')">Cung thủ (35 vàng)</button>
+      <button onclick="buyUnit('mage')">Phù thủy (50 vàng)</button>
+      <button onclick="buyUnit('giant')">Khổng lồ (80 vàng)</button>
+    </div>
+  </div>
+  <canvas id="game" width="1000" height="500"></canvas>
 </div>
+
 <script src="game.js"></script>
-<script>
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js')
-    .then(()=>console.log('Service Worker registered'))
-    .catch(err=>console.log('Service Worker failed:', err));
-}
-</script>
 </body>
 </html>
